@@ -4,7 +4,8 @@ services:
     image: mysql:8.0
     command: --default-authentication-plugin=mysql_native_password
     volumes:
-      - ./src/db/mysql_data:/var/lib/mysql
+      - ./src/db/mysql_data
+      # db:create時のエラーについてなのですが、docker-compose.ymlファイルのdbコンテナ内vlumesの:より後ろ側(ローカルMysqlの内容である:/var/lib/mysql)を削除してbuildしてみたところでなくなりました。この事から、ローカル環境にMySQLを構築してからでなければvlumesの後ろに:/var/lib/mysqlをつけてはいけないのかな？
     environment:
       MYSQL_ROOT_PASSWORD: password
   web:
